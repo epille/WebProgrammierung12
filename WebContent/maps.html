@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Bootstrap Case</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<style>
+#map {
+	width: 500px;
+	height: 400px;
+}
+</style>
+</head>
+<body>
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="index.html">Goethe Sport</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="index.html">Home</a></li>
+				<li><a href="any.jsp">Events</a></li>
+				<li><a href="http://localhost:80/Sportfest/db/results.php">Results</a></li>
+				<li class="active"><a href="maps.html">Maps</a></li>
+				<li><a href="about.html">About</a></li>
+			</ul>
+		</div>
+	</nav>
+	
+		<div class="container">
+		<canvas id="myCanvas" width="500" height="100"
+			style="border: 1px solid #000000;">
+</canvas>
+	</div>
+	
+	<div class="container">
+		<div id="map"></div>
+	</div>
+
+
+
+	<script>
+		function initMap() {
+			var myLatLng = {
+				lat : 49.691940,
+				lng : 8.620898
+			};
+			var mapDiv = document.getElementById('map');
+			var map = new google.maps.Map(mapDiv, {
+				center : {
+					lat : 49.691940,
+					lng : 8.620898
+				},
+				zoom : 12,
+				key : "AIzaSyDrEmebDOI1P7vqs5QJqRj_7HCSNTYP5cM"
+
+			});
+
+			var marker = new google.maps.Marker({
+				map : map,
+				position : myLatLng,
+				title : 'Goethe Gymnasium Bensheim'
+			});
+		}
+		
+		function fillCanvas(){
+			var c = document.getElementById("myCanvas");
+			var ctx = c.getContext("2d");
+			ctx.font = "18px Arial";
+			ctx.fillText("Bitte beachten Sie die aktuelle Parkplatzsituation!",10,50);
+		}
+		fillCanvas();
+	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+		async defer></script>
+</body>
+
+</body>
+</html>

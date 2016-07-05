@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bootstrap Case</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script>
+	console.log("Test")
+	$(document)
+			.ready(
+					function() {
+						$('#sub')
+								.click(
+										function(event) {
+											console.log("Test Klick")
+											var userid = $('#userid').val();
+											var password = $('#password').val();
+											//   	console.log(nachname, userid, time, competition);
+
+											$
+													.ajax({
+														url : '/Sportfest/session/logon.php',
+														data : {
+															userid : userid,
+															password : password
+														},
+														type : "POST",
+														success : function(
+																response) {
+															if (response == "true"
+																	&& password != "") {
+																console
+																		.log("Richtiges Password");
+																window.location
+																		.replace("any.jsp");
+															} else {
+																console
+																		.log("Falsches Password");
+																document
+																		.getElementById(
+																				'wrongpwd')
+																		.setAttribute(
+																				"hidden",
+																				"false");
+																//    	    		 location.refresh(true);
+															}
+														},
+														error : function() {
+															console
+																	.log("Calling php script failed.");
+														}
+													});
+
+										});
+					});
+</script>
+
+<link href="full.css" rel="stylesheet">
+
+<style>
+html {
+	background: url('images/maxresdefault.jpg') no-repeat center center
+		fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+}
+</style>
+</head>
+<body>
+
+	<div class="container">
+		<h3>Dies ist ein geschützer Bereich. Bitte loggen Sie sich ein.</h3>
+		<form class="form-horizontal"
+			action="http://localhost:80/Sportfest/session/logon.php"
+			method="post" role="form">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">User ID</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="userid"
+						placeholder="Enter userid">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Password</label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" id="password"
+						placeholder="Enter password">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="button" id="sub" class="btn btn-default">Logon</button>
+				</div>
+			</div>
+			<label hidden="true" class="control-label col-sm-2" id="wrongpwd"
+				for="pwd">Falsches Passwort!</label>
+
+
+		</form>
+	</div>
+
+</body>
+
+</html>
